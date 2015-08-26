@@ -1,21 +1,17 @@
-angular.module('app', ['ui.bootstrap', 'chart.js'])
-  // .config(function($stateProvider, $urlRouterProvider) {
-  //     $urlRouterProvider.otherwise('/home');
-  //     $stateProvider
-  //         // HOME STATES AND NESTED VIEWS ========================================
-  //         .state('home', {
-  //             url: '/home',
-  //             templateUrl: 'partials/home.html'
-  //         })
-  //         .state('summary', {
-  //             url: '/summary',
-  //             templateUrl: 'partials/summary.html'
-  //         })
-  //         // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
-  //         .state('about', {
-  //             // we'll get to this in a bit
-  //         });
-  // })
+angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
+  .config(function($stateProvider, $urlRouterProvider) {
+      $urlRouterProvider.otherwise('/home');
+      $stateProvider
+          // HOME STATES AND NESTED VIEWS ========================================
+          .state('home', {
+              url: '/home',
+              templateUrl: 'partials/home.html'
+          })
+          .state('screener', {
+              url: '/screener',
+              templateUrl: 'partials/screener.html'
+          });
+  })
   .factory('_', function() {
     return window._;
   })
@@ -30,10 +26,13 @@ angular.module('app', ['ui.bootstrap', 'chart.js'])
       $scope.finvizBullThree = data;
     });
     $http.get('https://api.import.io/store/data/b08fbc17-8964-4aa6-b5d6-20fb39771216/_query?input/webpage/url=http%3A%2F%2Ffinviz.com%2Fscreener.ashx%3Fv%3D111%26f%3Dfa_debteq_u1%2Cfa_eps5years_pos%2Cfa_epsqoq_pos%2Cfa_epsyoy_pos%2Cfa_epsyoy1_pos%2Cfa_estltgrowth_pos%2Cfa_grossmargin_pos%2Cfa_netmargin_pos%2Cfa_opermargin_pos%2Cfa_roa_pos%2Cfa_roe_pos%2Cfa_roi_pos%2Cfa_sales5years_pos%2Cfa_salesqoq_pos%2Cgeo_usa%2Cta_sma200_pa%26ft%3D4%26r%3D61&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a').success(function(data) {
-      $scope.finvizBullOFour = data;
+      $scope.finvizBullFour = data;
     });
     $http.get('https://api.import.io/store/data/b08fbc17-8964-4aa6-b5d6-20fb39771216/_query?input/webpage/url=http%3A%2F%2Ffinviz.com%2Fscreener.ashx%3Fv%3D111%26f%3Dfa_debteq_u1%2Cfa_eps5years_pos%2Cfa_epsqoq_pos%2Cfa_epsyoy_pos%2Cfa_epsyoy1_pos%2Cfa_estltgrowth_pos%2Cfa_grossmargin_pos%2Cfa_netmargin_pos%2Cfa_opermargin_pos%2Cfa_roa_pos%2Cfa_roe_pos%2Cfa_roi_pos%2Cfa_sales5years_pos%2Cfa_salesqoq_pos%2Cgeo_usa%2Cta_sma200_pa%26ft%3D4%26r%3D81&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a').success(function(data) {
-      $scope.finvizBullOFive = data;
+      $scope.finvizBullFive = data;
+    });
+    $http.get('https://api.import.io/store/data/b08fbc17-8964-4aa6-b5d6-20fb39771216/_query?input/webpage/url=http%3A%2F%2Ffinviz.com%2Fscreener.ashx%3Fv%3D111%26f%3Dfa_eps5years_neg%2Cfa_epsqoq_neg%2Cfa_sales5years_neg%2Cfa_salesqoq_neg%2Cgeo_usa%2Cta_sma200_pb%26ft%3D4&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a').success(function(data) {
+      $scope.finvizBear = data;
     });
     var mathSwitch = {
       "positiveNegative": function(number) {
@@ -84,6 +83,7 @@ angular.module('app', ['ui.bootstrap', 'chart.js'])
         $scope.exchange = $scope.exchangeSwitch($scope.exchangeSymbol.exchange);
         $scope.getData($scope.ticker, $scope.exchange);
       });
+
     };
 
 
