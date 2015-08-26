@@ -11,6 +11,26 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
               url: '/technical',
               templateUrl: 'partials/technical.html'
           })
+          .state('about', {
+              url: '/about',
+              templateUrl: 'partials/about.html'
+          })
+          .state('bounce', {
+              url: '/bounce',
+              templateUrl: 'partials/bounce.html'
+          })
+          .state('momentum', {
+              url: '/momentum',
+              templateUrl: 'partials/momentum.html'
+          })
+          .state('calculator', {
+              url: '/calculator',
+              templateUrl: 'partials/calculator.html'
+          })
+          .state('options', {
+              url: '/options',
+              templateUrl: 'partials/options.html'
+          })
           .state('screener', {
               url: '/screener',
               templateUrl: 'partials/screener.html'
