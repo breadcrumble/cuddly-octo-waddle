@@ -1,3 +1,5 @@
+{{balanceSheetQ}}
+
 <div class="page-header">
   <h1>Exchange Lookup
     <small>Enter Ticker Symbol</small>
@@ -156,7 +158,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="stock in finvizBear.results">
+          <tr ng-repeat="stock in finvizBearOne.results">
 
             <td>
               <span ng-bind="$index+1"></span>
@@ -171,6 +173,52 @@
               <span ng-bind="stock.sector"></span>
             </td>
           </tr>
+          <tr ng-repeat="stock in finvizBearTwo.results">
+
+            <td>
+              <span ng-bind="$index+21"></span>
+            </td>
+            <td>
+              <span ng-bind="stock.ticker"></span>
+            </td>
+            <td>
+              <span ng-bind="stock.company"></span>
+            </td>
+            <td>
+              <span ng-bind="stock.sector"></span>
+            </td>
+          </tr>
+          <tr ng-repeat="stock in finvizBearThree.results">
+
+            <td>
+              <span ng-bind="$index+41"></span>
+            </td>
+            <td>
+              <span ng-bind="stock.ticker"></span>
+            </td>
+            <td>
+              <span ng-bind="stock.company"></span>
+            </td>
+            <td>
+              <span ng-bind="stock.sector"></span>
+            </td>
+          </tr>
+          <tr ng-repeat="stock in finvizBearFour.results">
+
+            <td>
+              <span ng-bind="$index+61"></span>
+            </td>
+            <td>
+              <span ng-bind="stock.ticker"></span>
+            </td>
+            <td>
+              <span ng-bind="stock.company"></span>
+            </td>
+            <td>
+              <span ng-bind="stock.sector"></span>
+            </td>
+          </tr>
+
         </tbody>
       </table>
     </div>

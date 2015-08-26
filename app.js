@@ -2,10 +2,14 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
   .config(function($stateProvider, $urlRouterProvider) {
       $urlRouterProvider.otherwise('/home');
       $stateProvider
-          // HOME STATES AND NESTED VIEWS ========================================
+
           .state('home', {
               url: '/home',
               templateUrl: 'partials/home.html'
+          })
+          .state('technical', {
+              url: '/technical',
+              templateUrl: 'partials/technical.html'
           })
           .state('screener', {
               url: '/screener',
@@ -32,7 +36,16 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
       $scope.finvizBullFive = data;
     });
     $http.get('https://api.import.io/store/data/b08fbc17-8964-4aa6-b5d6-20fb39771216/_query?input/webpage/url=http%3A%2F%2Ffinviz.com%2Fscreener.ashx%3Fv%3D111%26f%3Dfa_eps5years_neg%2Cfa_epsqoq_neg%2Cfa_sales5years_neg%2Cfa_salesqoq_neg%2Cgeo_usa%2Cta_sma200_pb%26ft%3D4&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a').success(function(data) {
-      $scope.finvizBear = data;
+      $scope.finvizBearOne = data;
+    });
+    $http.get('https://api.import.io/store/data/b08fbc17-8964-4aa6-b5d6-20fb39771216/_query?input/webpage/url=http%3A%2F%2Ffinviz.com%2Fscreener.ashx%3Fv%3D111%26f%3Dfa_eps5years_neg%2Cfa_epsqoq_neg%2Cfa_sales5years_neg%2Cfa_salesqoq_neg%2Cgeo_usa%2Cta_sma200_pb%26ft%3D4%26r%3D21&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a').success(function(data) {
+      $scope.finvizBearTwo = data;
+    });
+    $http.get('https://api.import.io/store/data/b08fbc17-8964-4aa6-b5d6-20fb39771216/_query?input/webpage/url=http%3A%2F%2Ffinviz.com%2Fscreener.ashx%3Fv%3D111%26f%3Dfa_eps5years_neg%2Cfa_epsqoq_neg%2Cfa_sales5years_neg%2Cfa_salesqoq_neg%2Cgeo_usa%2Cta_sma200_pb%26ft%3D4%26r%3D41&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a').success(function(data) {
+      $scope.finvizBearThree = data;
+    });
+    $http.get('https://api.import.io/store/data/b08fbc17-8964-4aa6-b5d6-20fb39771216/_query?input/webpage/url=http%3A%2F%2Ffinviz.com%2Fscreener.ashx%3Fv%3D111%26f%3Dfa_eps5years_neg%2Cfa_epsqoq_neg%2Cfa_sales5years_neg%2Cfa_salesqoq_neg%2Cgeo_usa%2Cta_sma200_pb%26ft%3D4%26r%3D61&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a').success(function(data) {
+      $scope.finvizBearFour = data;
     });
     var mathSwitch = {
       "positiveNegative": function(number) {
@@ -73,6 +86,28 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
         else {
           return "warning";
         }
+      },
+      "roe": function(number) {
+        if (number>=10) {
+          return "success";
+        }
+        else if (5<=number<10) {
+          return "warning";
+        }
+        else if (number<0) {
+          return "danger";
+        }
+      },
+      "ltGrowth": function(number) {
+        if (number>=5) {
+          return "success";
+        }
+        else if (0<=number<5) {
+          return "warning";
+        }
+        else if (number<0) {
+          return "danger";
+        }
       }
     };
 
@@ -80,8 +115,7 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
     $scope.getExchange = function(ticker) {
       $http.get("https://api.import.io/store/data/41761159-261d-4429-9146-f18eb22a5a0d/_query?input/webpage/url=http%3A%2F%2Fwww.bloomberg.com%2Fresearch%2Fstocks%2Fsnapshot%2Fsnapshot.asp%3Fticker%3D" + ticker + "&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a").success(function(data) {
         $scope.exchangeSymbol = data.results[0];
-        $scope.exchange = $scope.exchangeSwitch($scope.exchangeSymbol.exchange);
-        $scope.getData($scope.ticker, $scope.exchange);
+        $scope.getData(ticker, exchangeSwitch($scope.exchangeSymbol.exchange));
       });
 
     };
@@ -123,8 +157,8 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
 
     };
     $scope.showFinVizBull = false;
-    $scope.ticker = "FB";
-    $scope.exchange = "O";
+    // $scope.ticker = "FB";
+    //$scope.exchange = "O";
     var sum = function(array) {
       var num = 0;
       for (var i = 0; i < array.length; i++) {
@@ -152,7 +186,7 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
       } else if (exchange == ("New York Consolidated" || "New York")) {
         return "N";
       } else {
-        return "N";
+        return "O";
       }
     };
     $scope.exchangeSwitch = exchangeSwitch;
@@ -161,19 +195,45 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
     };
     $scope.lastNum = lastNum;
     var sumDebt = function(st, lt) {
-      if ((!st || st == 0) && (lt == 0 || !lt)) {
-        return 0
-      } else if (!st || st == 0) {
-        return _.last(lt);
-      } else if (!lt || lt == 0) {
-        return _.last(st);
-      } else {
-        var stDebt, ltDebt, sum;
-        stDebt = _.last(st);
-        ltDebt = _.last(lt);
-        sum = stDebt + ltDebt;
-        return sum;
+      if (_.isArray(lt) && _.isArray(st)) {
+        return (_.last(lt) + _.last(st));
       }
+      else if (_.isArray(lt)) {
+        return (_.last(lt) + st);
+      }
+      else if (_.isArray(st)) {
+        return (_.last(st) + lt);
+      }
+      else if (!!_.isArray(st) == !!_.isArray(lt)) {
+        return  (st+lt);
+      }
+      else {
+        return 0;
+      }
+
+      // if ((!st || st == 0) && (lt == 0 || !lt)) {
+      //   return 0;
+      // } else if (!st || st == 0) {
+      //   if (_.isArray(lt)) {
+      //     return _.last(lt);
+      //   }
+      //   else {
+      //     return lt;
+      //   }
+      // } else if (!lt || lt == 0) {
+      //   if (_.isArray(st)) {
+      //     return _.last(st);
+      //   }
+      //   else {
+      //     return st;
+      //   }
+      // } else {
+      //   var stDebt, ltDebt, sum;
+      //   stDebt = _.last(st);
+      //   ltDebt = _.last(lt);
+      //   sum = stDebt + ltDebt;
+      //   return sum;
+      // }
     };
     $scope.sumDebt = sumDebt;
     var discountArrayFn = function(discRate) {
