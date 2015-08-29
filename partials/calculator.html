@@ -1,16 +1,186 @@
-
 <div class="page-header">
-  <h1>Position Sizing Calculator</h1>
+  <h1>Technical Analysis - Bullish</h1>
 </div>
 <div class="row">
-<div class="panel panel-primary">
-  <div class="panel-heading">
-    <h3 class="panel-title"><h1>COMING SOON</h1></h3>
+  <div class="col-md-6">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">Buy Rules (BTO)</h3>
+      </div>
+
+
+
+      <ul class="list-group">
+        <li class="list-group-item"><h4><strong>Short and Medium Term Uptrend</strong></h4>
+        <p>
+          Medium: 50SMA above 150SMA. Both sloping up.
+        <br>
+          Short: 20EMA above 40EMA.
+        </p></li>
+        <li class="list-group-item"><h4><strong>At least 2 out of 3 Bullish Indicators</strong></h4>
+        <p>
+          Parabolic SAR
+        <br>
+        Force Index
+        <br>
+        MACD (Black Above Red)
+        </p></li>
+        <li class="list-group-item"><h4><strong>No Strong Resistance</strong> </h4>
+        <p>
+          Less than 4 ATR away.
+        </p>
+
+        </li>
+        <li class="list-group-item"><h4><strong>Dip on Uptrend / Breakout / Reversal Pattern </strong> </h4>
+        <p>
+          Price is near 50/150/200SMA.
+          <br>
+          Tested Resistance.
+        </p></li>
+
+      </ul>
+    </div>
   </div>
-  <div class="panel-body">
+  <div class="col-md-6">
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title">Sell Rules (STC)</h3>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <h4><strong>Cut Losses</strong> <span class="label label-warning">IMPORTANT</span></h4>
+          <p>1 ATR below Key Support Line / Moving Average</p></li>
+        <li class="list-group-item">
+          <h4><strong>Stock Goes Into Downtrend</strong></h4>
+          <p>20 Day EMA below 40 Day EMA</p></li>
+      </li>
+      <li class="list-group-item">
+        <h4><strong>Protecting Profits</strong></h4>
+        <p>Trailing Stop Loss 2 ATR from the high <br>
+        (When price extends far beyond the MA) </p>
+      <p>When it hits a profit of 2R and one of the 3 indicators turn bearish</p>
+      <p>  MACD(black) below signal(red)</p>
+      <p>  When the price hits a pre-determined profit target (1.5R, 2R, etc)</p>
+
+      </li>
+      </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<hr>
+
+<!--
+  <div class="page-header">
+    <h1>Technical Analysis - Bearish</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <h3 class="panel-title">Sell Rules (STO)</h3>
+        </div>
+        1) Breakdown from consolidation
+        2) Rally on downtrend
+        3) Reversal from uptrend into new downtrend
+        <ul class="list-group">
+          <li class="list-group-item">Confirmed Downtrend - 50SMA below 150SMA, etc</li>
+          <li class="list-group-item">Overvalued OR Hit by Very Bad News</li>
+          <li class="list-group-item">Reward to Risk> 2:1</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title">Buy (Cover) Rules (BTC)</h3>
+        </div>
+<ul class="list-group">
+  <li class="list-group-item"></li>
+</ul>
 
   </div>
-  <div class="panel-footer">
+</div>
+</div>
+<hr> -->
 
+<div class="page-header">
+  <h1>Calculators</h1>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Position Sizing</h3>
+      </div>
+      <table class='table table-striped table-bordered table-hover table-condensed'>
+        <tbody>
+          <tr>
+            <td><h4>Portfolio Size (Capital):</h4></td>
+            <td>
+              <input class="form-control" ng-model="p.capital" type="text">
+            </td>
+          </tr>
+          <tr>
+            <td><h4>% Risk per Trade:</h4></td>
+            <td>
+              <input class="form-control" ng-model="p.riskTrade" type="text">
+            </td>
+          </tr>
+          <tr>
+            <td><h4>$ Risk per Share:</h4></td>
+            <td>
+              <input class="form-control" ng-model="p.riskShare" type="text">
+            </td>
+          </tr>
+          <tr>
+            <td><h4>Number of Positions:
+              </h4>
+            </td>
+            <td>
+              <h4>{{calculator.positionSizing(p.capital,p.riskTrade,p.riskShare)}}</h4>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div></div>
+  <div class="col-md-6">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">Risk to Reward Ratio</h3>
+      </div>
+      <table class='table table-striped table-bordered table-hover table-condensed'>
+        <tbody>
+          <tr>
+            <td><h4>Target Price (Profit Target):</h4></td>
+            <td>
+              <input class="form-control" ng-model="r.profitTarget" type="text">
+            </td>
+          </tr>
+          <tr>
+            <td><h4>Current Price:</h4></td>
+            <td>
+              <input class="form-control" ng-model="r.currentPrice" type="text">
+            </td>
+          </tr>
+          <tr>
+            <td><h4>Stop Loss:</h4></td>
+            <td>
+              <input class="form-control" ng-model="r.stopLoss" type="text">
+            </td>
+          </tr>
+          <tr>
+            <td><h4>Reward to Risk Ratio:
+                <br><small>Should be> 1</small></h4>
+              </td>
+              <td>
+                <h4>{{calculator.riskReward(r.profitTarget,r.currentPrice,r.stopLoss)}}
+                </h4>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

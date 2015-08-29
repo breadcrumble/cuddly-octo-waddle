@@ -15,7 +15,7 @@
   </div>
   <!--col md-->
   <div class="col-md-6">
-    <!-- <h3>Stock Exchange
+     <!-- <h3>Stock Exchange
       <span ng-bind="exchangeSwitch(exchangeSymbol.exchange)"></span>
       {{exchangeSymbol.exchange}}
     </h3>
@@ -61,10 +61,10 @@
         <tbody>
           <tr>
             <td>Sales</td>
-            <td ng-class="mathSwitch.ascdesc(incomeA.net_income)"
-              ng-repeat="netY in incomeA.net_income">
-              <span ng-bind="netY"></span>
-            </td>
+            <td ng-class="mathSwitch.ascdesc(incomeA.net_income)" ng-bind="incomeA.net_income[0]"></td>
+            <td ng-class="mathSwitch.ascdesc(incomeA.net_income)" ng-bind="incomeA.net_income[1]"></td>
+            <td ng-class="mathSwitch.ascdesc(incomeA.net_income)" ng-bind="incomeA.net_income[2]"></td>
+            <td ng-class="mathSwitch.ascdesc(incomeA.net_income)" ng-bind="incomeA.net_income[3]"></td>
           </tr>
           <tr>
             <td>Net Income</td>
@@ -515,4 +515,3 @@
                               </tbody>
                             </table>
                           </div>
-                          
