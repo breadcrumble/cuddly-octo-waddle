@@ -363,7 +363,13 @@
                     sumDebt(balanceSheetQ.st_borrow,balanceSheetQ.lt_debt)/reutersOverview.shares_outstanding
                     + lastNum(balanceSheetQ.cash_sti)/reutersOverview.shares_outstanding) -
                     reutersOverview.price)/(reutersOverview.price) | percentage: 2"></span>
-					<h4></h4>
+                    <h4 ng-if="sum(discountValue(projectedCF(sum(cashflowQ.cf_o),reutersFinancial.ltgrowth[3],5),discountArrayFn(discountRate(reutersFinancial.beta))))/reutersOverview.shares_outstanding
+                    -
+                    sumDebt(balanceSheetQ.st_borrow,balanceSheetQ.lt_debt)/reutersOverview.shares_outstanding
+                    + lastNum(balanceSheetQ.cash_sti)/reutersOverview.shares_outstanding">
+
+        <span class="label label-danger">PROCESS COMPLETE</span>
+                    </h4>
                 </td>
               </tr>
             </tbody>
@@ -446,13 +452,7 @@
 
                               </h4>
 
-                              <h4 ng-if="sum(discountValue(projectedCF(sum(cashflowQ.cf_o),reutersFinancial.ltgrowth[3],5),discountArrayFn(discountRate(reutersFinancial.beta))))/reutersOverview.shares_outstanding
-                              -
-                              sumDebt(balanceSheetQ.st_borrow,balanceSheetQ.lt_debt)/reutersOverview.shares_outstanding
-                              + lastNum(balanceSheetQ.cash_sti)/reutersOverview.shares_outstanding">
 
-                <span class="label label-danger">PROCESS COMPLETE</span>
-                              </h4>
                             </div>
                             <table class='table table-striped table-bordered table-hover table-condensed'>
                               <thead>
