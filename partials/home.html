@@ -1,15 +1,15 @@
-
+<!--
 <div class="page-header">
   <h1>Fundamental Analysis</h1>
-</div>
+</div>-->
 <div class="row">
   <div class="col-md-6">
     <h3>Input Stock Ticker Here</h3>
-    <div class="input-group">
-      <input class="form-control" ng-model="ticker" placeholder="Input Stock Ticker."
+    <div class="input-group">	
+      <input class="form-control" ng-model="ticker" id="ticker" placeholder="Input Stock Ticker."
       type="text">
       <span class="input-group-btn">
-        <button class="btn btn-default" ng-click="getExchange(ticker)" type="button">Go!</button>
+        <button class="btn btn-default" ng-click="getExchange(ticker)" id="ticker-submit" type="button">Go!</button>
       </span>
     </div>
   </div>
