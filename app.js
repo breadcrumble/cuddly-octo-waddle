@@ -1,40 +1,40 @@
 angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
   .config(function($stateProvider, $urlRouterProvider) {
-      $urlRouterProvider.otherwise('/home');
-      $stateProvider
+    $urlRouterProvider.otherwise('/home');
+    $stateProvider
 
-          .state('home', {
-              url: '/home',
-              templateUrl: 'partials/home.html'
-          })
-          .state('technical', {
-              url: '/technical',
-              templateUrl: 'partials/technical.html'
-          })
-          .state('about', {
-              url: '/about',
-              templateUrl: 'partials/about.html'
-          })
-          .state('bounce', {
-              url: '/bounce',
-              templateUrl: 'partials/bounce.html'
-          })
-          .state('momentum', {
-              url: '/momentum',
-              templateUrl: 'partials/momentum.html'
-          })
-          .state('calculator', {
-              url: '/calculator',
-              templateUrl: 'partials/calculator.html'
-          })
-          .state('options', {
-              url: '/options',
-              templateUrl: 'partials/options.html'
-          })
-          .state('screener', {
-              url: '/screener',
-              templateUrl: 'partials/screener.html'
-          });
+      .state('home', {
+        url: '/home',
+        templateUrl: 'partials/home.html'
+      })
+      .state('technical', {
+        url: '/technical',
+        templateUrl: 'partials/technical.html'
+      })
+      .state('about', {
+        url: '/about',
+        templateUrl: 'partials/about.html'
+      })
+      .state('bounce', {
+        url: '/bounce',
+        templateUrl: 'partials/bounce.html'
+      })
+      .state('momentum', {
+        url: '/momentum',
+        templateUrl: 'partials/momentum.html'
+      })
+      .state('calculator', {
+        url: '/calculator',
+        templateUrl: 'partials/calculator.html'
+      })
+      .state('options', {
+        url: '/options',
+        templateUrl: 'partials/options.html'
+      })
+      .state('screener', {
+        url: '/screener',
+        templateUrl: 'partials/screener.html'
+      });
   })
   .factory('_', function() {
     return window._;
@@ -92,40 +92,33 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
         for (var i = 1; i < array.length; i++) {
           if (array[i] > array[i - 1]) {
             desc = false;
-          }
-          else if (array[i] < array[i-1]) {
+          } else if (array[i] < array[i - 1]) {
             asc = false;
           }
         }
         if (asc) {
           return "success";
-        }
-        else if (desc) {
+        } else if (desc) {
           return "danger";
-        }
-        else {
+        } else {
           return "warning";
         }
       },
       "roe": function(number) {
-        if (number>=10) {
+        if (number >= 10) {
           return "success";
-        }
-        else if (5<=number<10) {
+        } else if (5 <= number < 10) {
           return "warning";
-        }
-        else if (number<0) {
+        } else if (number < 0) {
           return "danger";
         }
       },
       "ltGrowth": function(number) {
-        if (number>=5) {
+        if (number >= 5) {
           return "success";
-        }
-        else if (0<=number<5) {
+        } else if (0 <= number < 5) {
           return "warning";
-        }
-        else if (number<0) {
+        } else if (number < 0) {
           return "danger";
         }
       }
@@ -217,17 +210,13 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
     var sumDebt = function(st, lt) {
       if (_.isArray(lt) && _.isArray(st)) {
         return (_.last(lt) + _.last(st));
-      }
-      else if (_.isArray(lt)) {
+      } else if (_.isArray(lt)) {
         return (_.last(lt) + st);
-      }
-      else if (_.isArray(st)) {
+      } else if (_.isArray(st)) {
         return (_.last(st) + lt);
-      }
-      else if (!!_.isArray(st) == !!_.isArray(lt)) {
-        return  (st+lt);
-      }
-      else {
+      } else if (!!_.isArray(st) == !!_.isArray(lt)) {
+        return (st + lt);
+      } else {
         return 0;
       }
 
@@ -304,4 +293,32 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
     return function(input, decimals) {
       return $filter('number')(input * 100, decimals) + '%';
     };
-  }]);
+  }]).directive('calculations', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'partials/calc-app.html',
+      controller: ['$scope', '$http', function($scope, $http) {
+        var rewardToRisk = function(target, current, stopLoss) {
+          if (!(parseFloat(target) + parseFloat(current) + parseFloat(stopLoss))) {
+            return ("Input numbers only.");
+          }
+          else {
+            return ((parseFloat(target) - parseFloat(current)) / (parseFloat(current) - parseFloat(stopLoss)) + " : 1");
+          }
+        };
+
+        var positionSizing = function(capital, riskTrade, riskShare) {
+          if (!(parseFloat(capital) + parseFloat(riskTrade) + parseFloat(riskShare))) {
+            return ("Input numbers only.");
+          }
+          else {
+            return ((parseFloat(capital)*parseFloat(riskTrade/100)) / parseFloat(riskShare));
+          }
+        };
+        //revealing module pattern
+        $scope.rewardToRisk = rewardToRisk;
+        $scope.positionSizing = positionSizing;
+
+      }]
+    }
+  });
