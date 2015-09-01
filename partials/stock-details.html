@@ -30,20 +30,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+		 <tr>
             <td>Sales</td>
-            <td ng-class="mathSwitch.ascdesc(incomeA.net_income)" ng-bind="incomeA.net_income[0]"></td>
-            <td ng-class="mathSwitch.ascdesc(incomeA.net_income)" ng-bind="incomeA.net_income[1]"></td>
-            <td ng-class="mathSwitch.ascdesc(incomeA.net_income)" ng-bind="incomeA.net_income[2]"></td>
-            <td ng-class="mathSwitch.ascdesc(incomeA.net_income)" ng-bind="incomeA.net_income[3]"></td>
-          </tr>
-          <tr>
-            <td>Net Income</td>
             <td ng-class="mathSwitch.ascdesc(incomeA.revenues)"
               ng-repeat="rev in incomeA.revenues">
               <span ng-bind="rev"></span>
             </td>
           </tr>
+          <tr>
+            <td>Net Income</td>
+            <td ng-class="mathSwitch.ascdesc(incomeA.net_income)" ng-bind="incomeA.net_income[0]"></td>
+            <td ng-class="mathSwitch.ascdesc(incomeA.net_income)" ng-bind="incomeA.net_income[1]"></td>
+            <td ng-class="mathSwitch.ascdesc(incomeA.net_income)" ng-bind="incomeA.net_income[2]"></td>
+            <td ng-class="mathSwitch.ascdesc(incomeA.net_income)" ng-bind="incomeA.net_income[3]"></td>
+          </tr>
+         
           <tr>
             <td>
               Operating Cashflow - Annual
