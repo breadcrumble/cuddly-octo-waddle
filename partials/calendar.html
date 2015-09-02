@@ -4,9 +4,19 @@
     <small>Powered By FinViz</small>
   </h1>
 </div>
+<div class="row">
 
-{{getEarningsDates("20150903")}}
-{{calendarData | json}}
+  <div class="col-md-3">
+    <div class="input-group">
+      <input type="text" ng-model="dateString" class="form-control" placeholder="End Date">
+      <span class="input-group-btn">
+
+        <button class="btn btn-default" ng-click="getEarningsDates(dateString)" type="button">Go!</button>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+<hr>
 <div class="panel panel-yellow">
   <div class="panel-heading">
     <h3 class="panel-title"></h3>
