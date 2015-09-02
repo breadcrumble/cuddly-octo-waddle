@@ -30,9 +30,9 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
         url: '/options',
         templateUrl: 'partials/options.html'
       })
-      .state('screener', {
-        url: '/screener',
-        templateUrl: 'partials/screener.html'
+      .state('calendar', {
+        url: '/calendar',
+        templateUrl: 'partials/calendar.html'
       });
   })
   .factory('_', function() {
