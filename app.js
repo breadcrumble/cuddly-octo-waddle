@@ -40,6 +40,14 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
   })
   .controller('WATenController', function($scope, $http) {
     $scope.getExchange = function(ticker) {
+      $scope.reutersOverview = {};
+      $scope.reutersFinancial = {};
+      $scope.yahooFinance = {};
+      $scope.cashflowQ = {};
+      $scope.cashflowA = {};
+      $scope.balanceSheetQ = {};
+      $scope.incomeQ = {};
+      $scope.incomeA = {};
       $http.get("https://api.import.io/store/data/41761159-261d-4429-9146-f18eb22a5a0d/_query?input/webpage/url=http%3A%2F%2Fwww.bloomberg.com%2Fresearch%2Fstocks%2Fsnapshot%2Fsnapshot.asp%3Fticker%3D" + ticker + "&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a").success(function(data) {
         $scope.exchangeSymbol = data.results[0];
         $scope.getData(ticker, exchangeSwitch($scope.exchangeSymbol.exchange));
