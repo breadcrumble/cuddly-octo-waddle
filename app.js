@@ -41,6 +41,11 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
   .controller('WATenController', function($scope, $http) {
     //calendar
 
+    $scope.wa6Steps;
+    $scope.toggleWASixSteps = function() {
+      $scope.wa6Steps = !$scope.wa6Steps;
+    };
+
     $scope.getEarningsDates = function(dateString) {
       $scope.date =
       $scope.calendarData;

@@ -44,7 +44,7 @@
             <td ng-class="mathSwitch.ascdesc(incomeA.net_income)" ng-bind="incomeA.net_income[2]"></td>
             <td ng-class="mathSwitch.ascdesc(incomeA.net_income)" ng-bind="incomeA.net_income[3]"></td>
           </tr>
-         
+
           <tr>
             <td>
               Operating Cashflow - Annual
@@ -238,7 +238,13 @@
       </div>
     </div>
 
-<!--     <div class="row">
+    <div ng-if="wa6Steps">
+
+
+<div class="page-header">
+  <h1>Medium Term <small>Steps 4,5,6</small></h1>
+</div>
+    <div class="row">
       <div class="col-md-4">
         <div class="panel panel-info">
           <div class="panel-heading">
@@ -497,4 +503,5 @@
                               </tbody>
                             </table>
                           </div>
- -->
+
+                          </div>
