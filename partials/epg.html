@@ -21,21 +21,36 @@
                 <br>Positive surprise in the last quarter
                 </p>
               </li>
-              <li class="list-group-item">
-                <h4><strong>2. Sort By Date (Which will come first?)
-                  </strong>
-                </h4>
-                <p>
-                  Take note of the time when the earnings will be released.
-                  <br>(Before Market opens or After Market Closes?)
-                  </p>
-                </li>
+
                 <li class="list-group-item">
-                  <h4><strong>3. Stock Is On Uptrend
+                  <h4><strong>2. Stock Is On Uptrend
                     </strong>
                   </h4>
                   <p>
                     Stock is on Clear Uptrend
+                    <br>
+                    Go to <a href="http://www.chartmill.com">ChartMill.com</a> and filter out those which are not on uptrend.
+                  </p>
+                </li>
+                <li class="list-group-item">
+                  <h4><strong>3. Sort By Date (Which will come first?)
+                    </strong>
+                  </h4>
+                  <p>
+                    Take note of the time when the earnings will be released.
+                    <br>(Before Market opens or After Market Closes?)
+                    <br>
+                    If Earnings release before Market Opens, then buy the day before.
+                    <br>
+                    If Earnings release after Market Closes, then buy on the day itself.
+                    </p>
+                  </li>
+                <li class="list-group-item">
+                  <h4><strong>IMPORTANT!!
+                    </strong>
+                  </h4>
+                  <p>
+                    Before buying, check the latest ESP and Zacks Rank as it may change frequently.
                   </p>
                 </li>
               </ul>
@@ -64,7 +79,9 @@
                       <br>
                         <strong>SELL LIMIT ORDER (Take Profit):</strong> 2 ATR above the purchase price
                       </p>
-
+<p>
+  Adam: Opens position (on Mobile App) with MOC the night before, and before market opens, edit the Stop Loss and Take Profit Order.
+</p>
                     </li>
                   </li>
                   <li class="list-group-item">
@@ -89,3 +106,21 @@
             </div>
           </div>
           <hr>
+          <div class="page-header">
+            <h1>Zacks QuickLink <small>Type in Ticker and Press Go!</small></h1>
+          </div>
+          <h4 class="text-center"><strong>Check for ESP and Zacks Rank</strong>
+          </h4>
+          <div class="col-md-3">
+
+            <div class="input-group">
+              <input class="form-control" ng-model="tickerEPS" placeholder="Input Stock Ticker."
+              type="text">
+
+
+              <span class="input-group-btn">
+              <a class="btn btn-default" ng-href="http://www.zacks.com/stock/quote/{{tickerEPS | uppercase}}?q={{tickerEPS | lowercase}}">GO!</a>
+
+              </span>
+            </div>
+          </div>
