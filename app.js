@@ -40,6 +40,7 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
   })
   .controller('WATenController', function($scope, $http) {
     //calendar
+    $scope.bullBearToggle = "bull";
 
     $scope.wa6Steps;
     $scope.toggleWASixSteps = function() {
@@ -333,4 +334,5 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
         $scope.discountValue = discountValue;
       }]
     }
-  });
+  })
+  ;

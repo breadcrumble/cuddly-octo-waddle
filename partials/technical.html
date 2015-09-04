@@ -1,105 +1,15 @@
-<div class="page-header">
-  <h1>Technical Analysis - Bullish</h1>
-</div>
-<div class="row">
-  <div class="col-md-6">
-    <div class="panel panel-success">
-      <div class="panel-heading">
-        <h3 class="panel-title">Buy Rules (BTO)</h3>
-      </div>
+<div class="text-center">
+  <div class="btn-group" data-toggle="buttons">
 
-
-
-      <ul class="list-group">
-        <li class="list-group-item"><h4><strong>Short and Medium Term Uptrend</strong></h4>
-        <p>
-          Medium: 50SMA above 150SMA. Both sloping up.
-        <br>
-          Short: 20EMA above 40EMA.
-        </p></li>
-        <li class="list-group-item"><h4><strong>At least 2 out of 3 Bullish Indicators</strong></h4>
-        <p>
-          Parabolic SAR
-        <br>
-        Force Index
-        <br>
-        MACD (Black Above Red)
-        </p></li>
-        <li class="list-group-item"><h4><strong>No Strong Resistance</strong> </h4>
-        <p>
-          Less than 4 ATR away.
-        </p>
-
-        </li>
-        <li class="list-group-item"><h4><strong>Dip on Uptrend / Breakout / Reversal Pattern </strong> </h4>
-        <p>
-          Price is near 50/150/200SMA.
-          <br>
-          Tested Resistance.
-        </p></li>
-
-      </ul>
-    </div>
+    <label class="btn btn-success" >
+      <input type="radio" value="bull" ng-model="bullBearToggle" autocomplete="off"> Bullish Strategy
+    </label>
+    <label class="btn btn-danger">
+      <input type="radio" value="bear" ng-model="bullBearToggle" autocomplete="off"> Bearish Strategy
+    </label>
   </div>
-  <div class="col-md-6">
-    <div class="panel panel-danger">
-      <div class="panel-heading">
-        <h3 class="panel-title">Sell Rules (STC)</h3>
-      </div>
-      <ul class="list-group">
-        <li class="list-group-item">
-          <h4><strong>Cut Losses</strong> <span class="label label-warning">IMPORTANT</span></h4>
-          <p>1 ATR below Key Support Line / Moving Average</p></li>
-        <li class="list-group-item">
-          <h4><strong>Stock Goes Into Downtrend</strong></h4>
-          <p>20 Day EMA below 40 Day EMA</p></li>
-      </li>
-      <li class="list-group-item">
-        <h4><strong>Protecting Profits</strong></h4>
-        <p>Trailing Stop Loss 2 ATR from the high <br>
-        (When price extends far beyond the MA) </p>
-      <p>When it hits a profit of 2R and one of the 3 indicators turn bearish</p>
-      <p>  MACD(black) below signal(red)</p>
-      <p>  When the price hits a pre-determined profit target (1.5R, 2R, etc)</p>
 
-      </li>
-      </li>
-      </ul>
-    </div>
-  </div>
 </div>
-<hr>
 
-<!--
-  <div class="page-header">
-    <h1>Technical Analysis - Bearish</h1>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="panel panel-success">
-        <div class="panel-heading">
-          <h3 class="panel-title">Sell Rules (STO)</h3>
-        </div>
-        1) Breakdown from consolidation
-        2) Rally on downtrend
-        3) Reversal from uptrend into new downtrend
-        <ul class="list-group">
-          <li class="list-group-item">Confirmed Downtrend - 50SMA below 150SMA, etc</li>
-          <li class="list-group-item">Overvalued OR Hit by Very Bad News</li>
-          <li class="list-group-item">Reward to Risk> 2:1</li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="panel panel-danger">
-        <div class="panel-heading">
-          <h3 class="panel-title">Buy (Cover) Rules (BTC)</h3>
-        </div>
-<ul class="list-group">
-  <li class="list-group-item"></li>
-</ul>
-
-  </div>
-</div>
-</div>
-<hr> -->
+<div ng-if="bullBearToggle=='bear'" ng-include="'partials/bearishTA.html'"></div>
+<div ng-if="bullBearToggle=='bull'" ng-include="'partials/bullishTA.html'"></div>
