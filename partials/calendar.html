@@ -7,15 +7,28 @@
 <div class="row">
 
   <div class="col-md-3">
-    <h4>Input Date (YYYYMMDD)</h4>
+    <h4>Start Date (YYYYMMDD)</h4>
     <div class="input-group">
-      <input type="text" ng-model="dateString" class="form-control" placeholder="Input Date">
+      <input type="text" ng-model="dateString.start" class="form-control" placeholder="Input Date">
+      <span class="input-group-btn">
+
+
+      </span>
+    </div><!-- /input-group -->
+    <h4 ng-if="convertStringToDate(dateString.start)">{{convertStringToDate(dateString.start)}}</h4>
+  </div><!-- /.col-lg-6 -->
+  <div class="col-md-3">
+    <h4>End Date (YYYYMMDD)</h4>
+    <div class="input-group">
+      <input type="text" ng-model="dateString.end" class="form-control" placeholder="Input Date">
       <span class="input-group-btn">
 
         <button class="btn btn-default" ng-click="getEarningsDates(dateString)" type="button">Go!</button>
       </span>
     </div><!-- /input-group -->
+      <h4 ng-if="convertStringToDate(dateString.end)">{{convertStringToDate(dateString.end)}}</h4>
   </div><!-- /.col-lg-6 -->
+
 </div><!-- /.row -->
 <hr>
 <div class="panel panel-yellow">

@@ -40,11 +40,17 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
   })
   .controller('WATenController', function($scope, $http) {
     $scope.dataOne = {
-"annual": [[0,0,0,0], [0,0,0,0], [0,0,0,0]],
-"quarterly": [[0,0,0,0]]
+      "annual": [
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+      ],
+      "quarterly": [
+        [0, 0, 0, 0]
+      ]
 
     };
-  	$scope.labels = ['2011', '2012', '2013', '2014'];
+    $scope.labels = ['2011', '2012', '2013', '2014'];
     $scope.series = ['Sales', 'Net Income', 'Cashflow'];
 
 
@@ -56,15 +62,7 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
       $scope.wa6Steps = !$scope.wa6Steps;
     };
 
-    $scope.getEarningsDates = function(dateString) {
-      $scope.date =
-      $scope.calendarData;
-      $http.get("https://api.import.io/store/data/21c5ef17-bb28-475a-9707-ba03fdd5fc2c/_query?input/webpage/url=http%3A%2F%2Fbiz.yahoo.com%2Fresearch%2Fearncal%2F" + dateString + ".html&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a").success(function(data) {
-        var temp = data.results;
-        temp.splice(0,2);
-        $scope.calendarData = temp;
-      });
-    };
+
 
     //fundamental analysis
     $scope.getExchange = function(ticker) {
@@ -77,8 +75,16 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
       $scope.incomeQ = {};
       $scope.incomeA = {};
       $scope.dataOne = {
-  "annual": [[0,0,0,0], [0,0,0,0], [0,0,0,0]],
-  "quarterly": [[0,0,0,0], [0,0,0,0], [0,0,0,0]]
+        "annual": [
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0]
+        ],
+        "quarterly": [
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0]
+        ]
 
       };
       $http.get("https://api.import.io/store/data/41761159-261d-4429-9146-f18eb22a5a0d/_query?input/webpage/url=http%3A%2F%2Fwww.bloomberg.com%2Fresearch%2Fstocks%2Fsnapshot%2Fsnapshot.asp%3Fticker%3D" + ticker + "&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a").success(function(data) {
@@ -102,11 +108,11 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
       // cashflow quarterly
       $http.get("https://api.import.io/store/data/5624f0bc-efcb-45e2-b9b5-0e9b4fd4982a/_query?input/webpage/url=http%3A%2F%2Fwww.bloomberg.com%2Fresearch%2Fstocks%2Ffinancials%2Ffinancials.asp%3Fticker%3D" + ticker + "%26dataset%3DcashFlow%26period%3DQ%26currency%3Dnative&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a").success(function(data) {
         $scope.cashflowQ = data.results[0];
-        $scope.dataOne["quarterly"].splice(0,1,$scope.cashflowQ.cf_o);
+        $scope.dataOne["quarterly"].splice(0, 1, $scope.cashflowQ.cf_o);
       });
       $http.get("https://api.import.io/store/data/5624f0bc-efcb-45e2-b9b5-0e9b4fd4982a/_query?input/webpage/url=http%3A%2F%2Fwww.bloomberg.com%2Fresearch%2Fstocks%2Ffinancials%2Ffinancials.asp%3Fticker%3D" + ticker + "%26dataset%3DcashFlow%26period%3DA%26currency%3Dnative&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a").success(function(data) {
         $scope.cashflowA = data.results[0];
-        $scope.dataOne["annual"].splice(2,1,$scope.cashflowA.cf_o);
+        $scope.dataOne["annual"].splice(2, 1, $scope.cashflowA.cf_o);
       });
       // balance sheet quarterly
       $http.get("https://api.import.io/store/data/6c478c06-3d81-4e2a-bd82-8787cd07b587/_query?input/webpage/url=http%3A%2F%2Fwww.bloomberg.com%2Fresearch%2Fstocks%2Ffinancials%2Ffinancials.asp%3Fticker%3D" + ticker + "%26dataset%3DbalanceSheet%26period%3DQ%26currency%3Dnative&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a").success(function(data) {
@@ -119,8 +125,8 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
       // income statement yearly
       $http.get("https://api.import.io/store/data/18a5f33c-b173-4b0a-9f4d-6356268bf8e4/_query?input/webpage/url=http%3A%2F%2Fwww.bloomberg.com%2Fresearch%2Fstocks%2Ffinancials%2Ffinancials.asp%3Fticker%3D" + ticker + "%26dataset%3DincomeStatement%26period%3DA%26currency%3Dnative&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a").success(function(data) {
         $scope.incomeA = data.results[0];
-        $scope.dataOne["annual"].splice(0,1,$scope.incomeA.revenues);
-        $scope.dataOne["annual"].splice(1,1,$scope.incomeA.net_income);
+        $scope.dataOne["annual"].splice(0, 1, $scope.incomeA.revenues);
+        $scope.dataOne["annual"].splice(1, 1, $scope.incomeA.net_income);
       });
 
 
@@ -138,6 +144,48 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
       }
     };
     $scope.exchangeSwitch = exchangeSwitch;
+
+    //NOTE earnings release calendar
+
+    $scope.getEarningsDates = function(dateString) {
+      // if (0< dateString.end - dateString.start < 6) {
+      //   var array = [];
+      //   for (var date = dateString.start; date < dateString.end; date++) {
+      //     array.push();
+      //   }
+      // }
+      $scope.date = dateString.start;
+        $scope.calendarData;
+      $http.get("https://api.import.io/store/data/21c5ef17-bb28-475a-9707-ba03fdd5fc2c/_query?input/webpage/url=http%3A%2F%2Fbiz.yahoo.com%2Fresearch%2Fearncal%2F" + date + ".html&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a").success(function(data) {
+        var temp = data.results;
+        temp.splice(0, 2);
+        $scope.calendarData = temp;
+      });
+    };
+
+
+    var weekday = ["Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ];
+    var convertStringToDate = function(string) {
+      // var string = str.toString();
+      // if (string.length == 6) {
+        var pattern = /(\d{4})(\d{2})(\d{2})/;
+        var date = new Date(string.replace(pattern, '$1-$2-$3'));
+        return weekday[date.getDay()];
+      // }
+
+    };
+
+    $scope.convertStringToDate = convertStringToDate;
+
+
+
 
 
   })
@@ -353,5 +401,4 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
         $scope.discountValue = discountValue;
       }]
     }
-  })
-  ;
+  });
