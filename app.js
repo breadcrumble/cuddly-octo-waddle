@@ -39,12 +39,13 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
     return window._;
   })
   .controller('WATenController', function($scope, $http) {
-    $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-    $scope.series = ['Series A', 'Series B'];
-    $scope.data = [
-      [65, 59, 80, 81, 56, 55, 40],
-      [28, 48, 40, 19, 86, 27, 90]
-    ];
+    $scope.dataOne = {
+"annual": [[0,0,0,0], [0,0,0,0], [0,0,0,0]],
+"quarterly": [[0,0,0,0]]
+
+    };
+  	$scope.labels = ['2011', '2012', '2013', '2014'];
+    $scope.series = ['Sales', 'Net Income', 'Cashflow'];
 
 
     //calendar
@@ -75,6 +76,11 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
       $scope.balanceSheetQ = {};
       $scope.incomeQ = {};
       $scope.incomeA = {};
+      $scope.dataOne = {
+  "annual": [[0,0,0,0], [0,0,0,0], [0,0,0,0]],
+  "quarterly": [[0,0,0,0], [0,0,0,0], [0,0,0,0]]
+
+      };
       $http.get("https://api.import.io/store/data/41761159-261d-4429-9146-f18eb22a5a0d/_query?input/webpage/url=http%3A%2F%2Fwww.bloomberg.com%2Fresearch%2Fstocks%2Fsnapshot%2Fsnapshot.asp%3Fticker%3D" + ticker + "&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a").success(function(data) {
         $scope.exchangeSymbol = data.results[0];
         $scope.getData(ticker, exchangeSwitch($scope.exchangeSymbol.exchange));
@@ -96,9 +102,11 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
       // cashflow quarterly
       $http.get("https://api.import.io/store/data/5624f0bc-efcb-45e2-b9b5-0e9b4fd4982a/_query?input/webpage/url=http%3A%2F%2Fwww.bloomberg.com%2Fresearch%2Fstocks%2Ffinancials%2Ffinancials.asp%3Fticker%3D" + ticker + "%26dataset%3DcashFlow%26period%3DQ%26currency%3Dnative&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a").success(function(data) {
         $scope.cashflowQ = data.results[0];
+        $scope.dataOne["quarterly"].splice(0,1,$scope.cashflowQ.cf_o);
       });
       $http.get("https://api.import.io/store/data/5624f0bc-efcb-45e2-b9b5-0e9b4fd4982a/_query?input/webpage/url=http%3A%2F%2Fwww.bloomberg.com%2Fresearch%2Fstocks%2Ffinancials%2Ffinancials.asp%3Fticker%3D" + ticker + "%26dataset%3DcashFlow%26period%3DA%26currency%3Dnative&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a").success(function(data) {
         $scope.cashflowA = data.results[0];
+        $scope.dataOne["annual"].splice(2,1,$scope.cashflowA.cf_o);
       });
       // balance sheet quarterly
       $http.get("https://api.import.io/store/data/6c478c06-3d81-4e2a-bd82-8787cd07b587/_query?input/webpage/url=http%3A%2F%2Fwww.bloomberg.com%2Fresearch%2Fstocks%2Ffinancials%2Ffinancials.asp%3Fticker%3D" + ticker + "%26dataset%3DbalanceSheet%26period%3DQ%26currency%3Dnative&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a").success(function(data) {
@@ -111,6 +119,8 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
       // income statement yearly
       $http.get("https://api.import.io/store/data/18a5f33c-b173-4b0a-9f4d-6356268bf8e4/_query?input/webpage/url=http%3A%2F%2Fwww.bloomberg.com%2Fresearch%2Fstocks%2Ffinancials%2Ffinancials.asp%3Fticker%3D" + ticker + "%26dataset%3DincomeStatement%26period%3DA%26currency%3Dnative&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a").success(function(data) {
         $scope.incomeA = data.results[0];
+        $scope.dataOne["annual"].splice(0,1,$scope.incomeA.revenues);
+        $scope.dataOne["annual"].splice(1,1,$scope.incomeA.net_income);
       });
 
 
@@ -214,6 +224,7 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
             }
           },
           "ltGrowth": function(number) {
+            number = parseFloat(number);
             if (number >= 5) {
               return "success";
             } else if (0 <= number < 5) {

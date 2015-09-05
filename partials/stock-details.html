@@ -1,6 +1,6 @@
 
 <div class="page-header">
-  <h1>Short Term Analysis <small></small></h1>
+  <h1>Short Term Analysis <small ng-if="ticker">For "{{ticker}}"</small></h1>
 </div>
 <div class="row">
   <div class="col-md-6">
@@ -90,13 +90,21 @@
     </div>
     <div class="panel panel-info">
       <div class="panel-heading">
-        <h3 class="panel-title">Sales, Net Income and Operating Cashflow</h3>
+        <h3 class="panel-title">Sales, Net Income and Operating Cashflow - ANNUAL</h3>
       </div>
       <div class="panel-body">
-        <canvas id="line" class="chart chart-line" data="data" series="series"
+        <canvas id="line" class="chart chart-line" data="dataOne.annual" series="series"
 labels="labels"></canvas>
       </div>
-
+<div class="panel panel-yellow">
+  <div class="panel-heading">
+    <h3 class="panel-title">Quarterly Operating Cashflow</h3>
+  </div>
+  <div class="panel-body">
+    <canvas id="line" class="chart chart-line" data="dataOne.quarterly" series="series"
+    labels="labels"></canvas>
+  </div>
+</div>
     </div>
   </div>
   <div class="col-md-6">
