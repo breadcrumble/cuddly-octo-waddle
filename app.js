@@ -1,9 +1,9 @@
 angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
   .config(function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/');
     $stateProvider
       .state('home', {
-        url: '/home',
+        url: '/',
         templateUrl: 'partials/home.html'
       })
       .state('technical', {
@@ -39,6 +39,9 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
     return window._;
   })
   .controller('WATenController', function($scope, $http) {
+
+
+
     //calendar
     $scope.bullBearToggle = "bull";
 
