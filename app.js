@@ -146,22 +146,40 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
     $scope.exchangeSwitch = exchangeSwitch;
 
     //NOTE earnings release calendar
-
     $scope.getEarningsDates = function(dateString) {
-      // if (0< dateString.end - dateString.start < 6) {
-      //   var array = [];
-      //   for (var date = dateString.start; date < dateString.end; date++) {
-      //     array.push();
-      //   }
-      // }
-      $scope.date = dateString.start;
-        $scope.calendarData;
-      $http.get("https://api.import.io/store/data/21c5ef17-bb28-475a-9707-ba03fdd5fc2c/_query?input/webpage/url=http%3A%2F%2Fbiz.yahoo.com%2Fresearch%2Fearncal%2F" + date + ".html&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a").success(function(data) {
-        var temp = data.results;
-        temp.splice(0, 2);
-        $scope.calendarData = temp;
-      });
+      if (0 < parseFloat(dateString.end) - parseFloat(dateString.start) < 6) {
+        for (var i = parseFloat(dateString.start); i <= parseFloat(dateString.end); i++) {
+          var calendar = [];
+          $scope.calendarData = [];
+          $http.get("https://api.import.io/store/data/21c5ef17-bb28-475a-9707-ba03fdd5fc2c/_query?input/webpage/url=http%3A%2F%2Fbiz.yahoo.com%2Fresearch%2Fearncal%2F" + i + ".html&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a").success(function(data) {
+            var temp = data.results;
+            temp.splice(0,2);
+            calendar.push(temp);
+            // $scope.calendarData = calendar[0];
+            $scope.calendarData = _.flatten(calendar);
+          });
+        }
+
+
+      }
+
     };
+    //
+    // $scope.getEarningsDates = function(dateString) {
+    //   // if (0< dateString.end - dateString.start < 6) {
+    //   //   var array = [];
+    //   //   for (var date = dateString.start; date < dateString.end; date++) {
+    //   //     array.push();
+    //   //   }
+    //   // }
+    //   $scope.date = dateString.start;
+    //     $scope.calendarData;
+    //   $http.get("https://api.import.io/store/data/21c5ef17-bb28-475a-9707-ba03fdd5fc2c/_query?input/webpage/url=http%3A%2F%2Fbiz.yahoo.com%2Fresearch%2Fearncal%2F" + date + ".html&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a").success(function(data) {
+    //     var temp = data.results;
+    //     temp.splice(0, 2);
+    //     $scope.calendarData = temp;
+    //   });
+    // };
 
 
     var weekday = ["Sunday",
