@@ -43,18 +43,13 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
     return window._;
   })
   .controller('WATenController', function($scope, $http, _) {
-    $scope.dataOne = {
-      "annual": [
+    $scope.dataOne =
+    [
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0]
-      ],
-      "quarterly": [
-        [0, 0, 0, 0]
-      ]
-
-    };
-    $scope.labels = ['2011', '2012', '2013', '2014'];
+      ];
+    $scope.labels = ['Y1', 'Y2', 'Y3'];
     $scope.series = ['Sales', 'Net Income', 'Cashflow'];
 
 
@@ -69,38 +64,73 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
     $scope.verTwoFn = {};
     $scope.verTwoResults = {};
 
-    $scope.testksjdfh = 1+4+200;
     $scope.verTwoFn.getExchange = function(ticker) {
 
-      $scope.reutersOverview = {};
-      $scope.reutersFinancial = {};
-      $scope.yahooFinance = {};
-      $scope.cashflowQ = {};
-      $scope.cashflowA = {};
-      $scope.balanceSheetQ = {};
-      $scope.incomeQ = {};
-      $scope.incomeA = {};
-      $scope.dataOne = {
-        "annual": [
-          [0, 0, 0, 0],
-          [0, 0, 0, 0],
-          [0, 0, 0, 0]
-        ],
-        "quarterly": [
-          [0, 0, 0, 0],
-          [0, 0, 0, 0],
-          [0, 0, 0, 0]
-        ]
-
-      };
-      $http.get("https://api.import.io/store/data/ad724e88-f3c7-4b0e-b0c6-ae2a71f7810a/_query?input/webpage/url=http%3A%2F%2Fwww.marketwatch.com%2Finvesting%2Fstock%2F"+ticker+"%2Ffinancials&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a")
+      $scope.verTwoResults = {};
+      $scope.dataOne =
+        [
+          [0, 0, 0],
+          [0, 0, 0],
+          [0, 0, 0]
+        ];
+      $http.get("https://api.import.io/store/data/9a47319f-e2d2-46bb-8286-387fedefa516/_query?input/webpage/url=https%3A%2F%2Ffinance.yahoo.com%2Fq%2Fis%3Fs%3D" + ticker + "%2BIncome%2BStatement%26annual&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a")
     .success(function(data) {
-        $scope.verTwoResults.firstCall = data.results[0];
-        $scope.getData(ticker, exchangeSwitch($scope.exchangeSymbol.exchange));
+        $scope.verTwoResults.incomeStatement = data.results[0];
+
+        $scope.verTwoFn.getData(ticker, exchangeSwitchTwo($scope.verTwoResults.incomeStatement.exchange));
+        //$scope.getData(ticker, exchangeSwitch($scope.exchangeSymbol.exchange));
+        $scope.dataOne.splice(0, 1, invertArray($scope.verTwoResults.incomeStatement.revenue));
+        $scope.dataOne.splice(1, 1, invertArray($scope.verTwoResults.incomeStatement.net_income));
       });
+      $http.get("https://api.import.io/store/data/c9d468c4-33b4-430c-a7cb-4665a7ebbd44/_query?input/webpage/url=https%3A%2F%2Ffinance.yahoo.com%2Fq%2Fbs%3Fs%3D" + ticker + "&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a")
+    .success(function(data) {
+        $scope.verTwoResults.balanceSheet = data.results[0];
+      });
+      $http.get("https://api.import.io/store/data/516dd766-cf25-4fcf-a517-a5c4e464f774/_query?input/webpage/url=https%3A%2F%2Ffinance.yahoo.com%2Fq%2Fcf%3Fs%3D"+ ticker + "%2BCash%2BFlow%26annual&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a")
+    .success(function(data) {
+        $scope.verTwoResults.cashflow = data.results[0];
+        $scope.dataOne.splice(2, 1, invertArray($scope.verTwoResults.cashflow.ocf));
+      });
+
+
 
     };
 
+    $scope.verTwoFn.getData = function(ticker, exchange) {
+      //TODO
+
+      // reuters overview
+      $http.get("https://api.import.io/store/data/74d1f024-3c9d-4d4c-8ca4-3229d942452a/_query?input/webpage/url=http%3A%2F%2Fwww.reuters.com%2Ffinance%2Fstocks%2Foverview%3Fsymbol%3D" + ticker + "." + exchange + "&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a").success(function(data) {
+        $scope.verTwoResults.reutersOverview = data.results[0];
+      });
+      // Reuters financial
+      $http.get("https://api.import.io/store/data/6fab4b3f-87c9-4777-ab36-2f47a56ff723/_query?input/webpage/url=http%3A%2F%2Fwww.reuters.com%2Ffinance%2Fstocks%2FfinancialHighlights%3Fsymbol%3D" + ticker + "." + exchange + "&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a").success(function(data) {
+        $scope.verTwoResults.reutersFinancial = data.results[0];
+      });
+      // Yahoo
+      $http.get("https://api.import.io/store/data/24281222-34d8-4656-9924-fec56ada3384/_query?input/webpage/url=http%3A%2F%2Ffinance.yahoo.com%2Fq%2Fae%3Fs%3D" + ticker + "%2BAnalyst%2BEstimates&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a").success(function(data) {
+        $scope.verTwoResults.yahooFinance = data.results[0];
+      });
+    };
+
+    var invertArray = function(array) {
+      return array.reverse();
+    };
+    var exchangeSwitchTwo = function(exchange) {
+      var xSymbol = exchange.substr(1), tickerSymbol;
+      switch (xSymbol) {
+        case "NasdaqGS":
+        tickerSymbol = "O";
+          break;
+          case "NYSE":
+          tickerSymbol = "N";
+            break;
+        default:
+        tickerSymbol = "";
+      }
+      return tickerSymbol;
+    };
+    $scope.exchangeSwitchTwo = exchangeSwitchTwo;
     //fundamental analysis
     $scope.getExchange = function(ticker) {
       $scope.reutersOverview = {};
@@ -456,4 +486,5 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
         $scope.discountValue = discountValue;
       }]
     }
+
   });
