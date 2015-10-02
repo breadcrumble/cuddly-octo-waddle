@@ -43,6 +43,69 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
     return window._;
   })
   .controller('WATenController', function($scope, $http, _) {
+
+    //copy of mathswitch data
+    var mathSwitch = {
+      "positiveNegative": function(number) {
+        if (number > 0) {
+          return "success";
+        } else if (number == 0) {
+          return "warning";
+        } else if (number < 0) {
+          return "danger";
+        }
+      },
+      "higherThan": function(array, index) {
+        if (array[index] > array[index + 1]) {
+          return "success";
+        } else if (array[index] > array[index + 1]) {
+          return "danger";
+        } else {
+          return "warning";
+        }
+      },
+      "ascdesc": function(array) {
+        var asc = true,
+          desc = true;
+        for (var i = 1; i < array.length; i++) {
+          if (array[i] > array[i - 1]) {
+            desc = false;
+          } else if (array[i] < array[i - 1]) {
+            asc = false;
+          }
+        }
+        if (asc) {
+          return "success";
+        } else if (desc) {
+          return "danger";
+        } else {
+          return "warning";
+        }
+      },
+      "roe": function(number) {
+        if (number >= 10) {
+          return "success";
+        } else if (5 <= number < 10) {
+          return "warning";
+        } else if (number < 0) {
+          return "danger";
+        }
+      },
+      "ltGrowth": function(number) {
+        number = parseFloat(number);
+        if (number >= 5) {
+          return "success";
+        } else if (0 <= number < 5) {
+          return "warning";
+        } else if (number < 0) {
+          return "danger";
+        }
+      }
+    };
+
+    $scope.mathSwitch = mathSwitch;
+
+    //NOTE end copy
     $scope.dataOne =
     [
         [0, 0, 0, 0],

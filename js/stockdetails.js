@@ -112,11 +112,6 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
         }
         return array;
       };
-      // $scope.finalIV = function() {
-      //   if (!!reutersFinancial.ltgrowth) {
-      //     return ((sum(discountValue(projectedCF(sum(cashflowQ.cf_o), reutersFinancial.ltgrowth[3], 5), discountArrayFn(discountRate(reutersFinancial.beta)))) / reutersOverview.shares_outstanding) - sumDebt(balanceSheetQ.st_borrow, balanceSheetQ.lt_debt) / reutersOverview.shares_outstanding + lastNum(balanceSheetQ.cash_sti) / reutersOverview.shares_outstanding);
-      //   }
-      // };
       $scope.discountArrayFn = discountArrayFn;
       var lastNum = function(array) {
         return _.last(array);
