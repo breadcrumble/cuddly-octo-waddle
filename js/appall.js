@@ -42,7 +42,7 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
   .factory('_', function() {
     return window._;
   })
-  .controller('WATenController', function($scope, $http) {
+  .controller('WATenController', function($scope, $http, _) {
     $scope.dataOne = {
       "annual": [
         [0, 0, 0, 0],
@@ -96,18 +96,8 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
       $http.get("https://api.import.io/store/data/ad724e88-f3c7-4b0e-b0c6-ae2a71f7810a/_query?input/webpage/url=http%3A%2F%2Fwww.marketwatch.com%2Finvesting%2Fstock%2F"+ticker+"%2Ffinancials&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a")
     .success(function(data) {
         $scope.verTwoResults.firstCall = data.results[0];
-        //$scope.getData(ticker, exchangeSwitch($scope.exchangeSymbol.exchange));
+        $scope.getData(ticker, exchangeSwitch($scope.exchangeSymbol.exchange));
       });
-    //   $http.get("https://api.import.io/store/data/ad724e88-f3c7-4b0e-b0c6-ae2a71f7810a/_query?input/webpage/url=http%3A%2F%2Fwww.marketwatch.com%2Finvesting%2Fstock%2F"+ticker+"%2Ffinancials&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a")
-    // .success(function(data) {
-    //     $scope.verTwoResults.balanceSheetQ = data.results[0];
-    //     //$scope.getData(ticker, exchangeSwitch($scope.exchangeSymbol.exchange));
-    //   });
-    //   $http.get("https://api.import.io/store/data/ad724e88-f3c7-4b0e-b0c6-ae2a71f7810a/_query?input/webpage/url=http%3A%2F%2Fwww.marketwatch.com%2Finvesting%2Fstock%2F"+ticker+"%2Ffinancials&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a")
-    // .success(function(data) {
-    //     $scope.verTwoResults.in = data.results[0];
-    //     //$scope.getData(ticker, exchangeSwitch($scope.exchangeSymbol.exchange));
-    //   });
 
     };
 
@@ -178,7 +168,10 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
 
 
     };
-  var exchangeSwitch = function(exchange) {
+    // $scope.ticker = "FB";
+    //$scope.exchange = "O";
+
+    var exchangeSwitch = function(exchange) {
       if (exchange == ("NASDAQ GS" || "Consolidated Issue Listed on NASDAQ Global Select")) {
         return "O";
       } else if (exchange == ("New York Consolidated" || "New York")) {
@@ -199,6 +192,7 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
             var temp = data.results;
             temp.splice(0,2);
             calendar.push(temp);
+            // $scope.calendarData = calendar[0];
             $scope.calendarData = _.flatten(calendar);
           });
         }
@@ -207,6 +201,22 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
       }
 
     };
+    //
+    // $scope.getEarningsDates = function(dateString) {
+    //   // if (0< dateString.end - dateString.start < 6) {
+    //   //   var array = [];
+    //   //   for (var date = dateString.start; date < dateString.end; date++) {
+    //   //     array.push();
+    //   //   }
+    //   // }
+    //   $scope.date = dateString.start;
+    //     $scope.calendarData;
+    //   $http.get("https://api.import.io/store/data/21c5ef17-bb28-475a-9707-ba03fdd5fc2c/_query?input/webpage/url=http%3A%2F%2Fbiz.yahoo.com%2Fresearch%2Fearncal%2F" + date + ".html&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a").success(function(data) {
+    //     var temp = data.results;
+    //     temp.splice(0, 2);
+    //     $scope.calendarData = temp;
+    //   });
+    // };
 
 
     var weekday = ["Sunday",

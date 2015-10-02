@@ -1,0 +1,547 @@
+
+{{verTwoResults.firstCall   | json}}
+<div class="row">
+  <div class="col-md-6">
+    <h3>Input Stock Ticker Here {{testksjdfh}}</h3>
+     <form name="tickerSearch" ng-submit="verTwoFn.getExchange(ticker)">
+    <div class="input-group">
+      <input class="form-control" ng-model="ticker" placeholder="Input Stock Ticker."
+      type="text">
+
+
+      <span class="input-group-btn">
+        <input class="btn btn-default" ng-click="verTwoFn.getExchange(ticker)" type="submit" value="GO!"></input>
+
+      </span>
+    </div>
+    </form>
+
+  </div>
+  <!--col md-->
+  <br>
+  <br>
+  <br>
+  <div class="col-md-6">
+<button type='button' ng-click="toggleWASixSteps()" class='btn btn-md btn-warning align-right'>Toggle WA 6 Steps ></button>
+
+
+
+  </div>
+  <!--col md-->
+</div>
+<div class="page-header">
+  <h1>Short Term Analysis <small ng-if="ticker">For "{{ticker}}"</small></h1>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">Profits</h3>
+      </div>
+      <div class="panel-body">
+        <h4>Consistent Increase in Sales, Net Income, and CashFlow from Operations</h4>
+      </div>
+      <table class='table table-striped table-bordered table-hover table-condensed'>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>
+              Y1
+            </th>
+            <th>
+              Y2
+            </th>
+            <th>
+              Y3
+            </th>
+            <th>
+              Y4
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+		 <tr>
+            <td>Sales</td>
+            <td ng-bind="verTwoResults.incomeStatement.revenue[1]"></td>
+            <td ng-bind="verTwoResults.incomeStatement.revenue[2]"></td>
+            <td ng-bind="verTwoResults.incomeStatement.revenue[3]"></td>
+            <td ng-bind="verTwoResults.incomeStatement.revenue[4]"></td>
+          </tr>
+          <tr>
+            <td>Net Income</td>
+            <td ng-bind="verTwoResults.incomeStatement.net_income[1]"></td>
+            <td ng-bind="verTwoResults.incomeStatement.net_income[2]"></td>
+            <td ng-bind="verTwoResults.incomeStatement.net_income[3]"></td>
+            <td ng-bind="verTwoResults.incomeStatement.net_income[4]"></td>
+          </tr>
+
+          <tr>
+            <td>
+              Operating Cashflow - Annual
+            </td>
+            <td ng-class="mathSwitch.ascdesc(cashflowA.cf_o)"
+              ng-repeat="ocf in cashflowA.cf_o">
+              <span ng-bind="ocf | number: 2"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+        <table class='table table-striped table-bordered table-hover table-condensed'>
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>
+                Q1
+              </th>
+              <th>
+                Q2
+              </th>
+              <th>
+                Q3
+              </th>
+              <th>
+                Q4
+              </th>
+            </tr>
+          </thead>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Operating Cashflow - Quarterly</td>
+            <td ng-class="mathSwitch.ascdesc(cashflowQ.cf_o)"
+              ng-repeat="ocf in cashflowQ.cf_o">
+              <span ng-bind="ocf"></span>
+            </td>
+          </tr>
+          <tr></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">Sales, Net Income and Operating Cashflow - ANNUAL</h3>
+      </div>
+      <div class="panel-body">
+        <canvas id="line" class="chart chart-line" data="dataOne.annual" series="series"
+labels="labels"></canvas>
+      </div>
+<div class="panel panel-yellow">
+  <div class="panel-heading">
+    <h3 class="panel-title">Quarterly Operating Cashflow</h3>
+  </div>
+  <div class="panel-body">
+    <canvas id="line" class="chart chart-line" data="dataOne.quarterly" series="series"
+    labels="labels"></canvas>
+  </div>
+</div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">Future Growth Drivers</h3>
+      </div>
+      <div class="panel-body">
+        <h4>LT Growth Rate/EPS positive for next 5 years Rising Earnings Estimates and
+          EPS revisions (BONUS:>10% Growth rate)</h4>
+      </div>
+      <table class='table table-striped table-bordered table-hover table-condensed'>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>
+              No. of Est.
+            </th>
+            <th>
+              Mean
+            </th>
+            <th>
+              High
+            </th>
+            <th>
+              Low
+            </th>
+            <th>
+              1 Year Ago
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>LT Growth Rate (%)</td>
+            <td ng-bind="reutersFinancial.ltgrowth[0]"></td>
+            <td ng-bind="reutersFinancial.ltgrowth[1]" ng-class="mathSwitch.ltGrowth(reutersFinancial.ltgrowth[1])"></td>
+            <td ng-bind="reutersFinancial.ltgrowth[2]" ng-class="mathSwitch.ltGrowth(reutersFinancial.ltgrowth[2])"></td>
+            <td ng-bind="reutersFinancial.ltgrowth[3]" ng-class="mathSwitch.ltGrowth(reutersFinancial.ltgrowth[3])"></td>
+            <td ng-bind="reutersFinancial.ltgrowth[4]" ng-class="mathSwitch.ltGrowth(reutersFinancial.ltgrowth[4])"></td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+        <table class='table table-striped table-bordered table-hover table-condensed'>
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>
+                Company
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>EPS Next 5 Yr</td>
+              <td ng-bind="reutersFinancial.eps5year[0]"
+                ng-class="mathSwitch.positiveNegative(reutersFinancial.eps5year[0])"></td>
+            </tr>
+          </tbody>
+        </table>
+        <hr>
+          <table class='table table-striped table-bordered table-hover table-condensed'>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>
+                  Current Q
+                </th>
+                <th>
+                  Next Q
+                </th>
+                <th>
+                  Current Year
+                </th>
+                <th>
+                  Next Year
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  Earnings Estimates
+                </td>
+                <td ng-class="mathSwitch.ascdesc(-yahooFinance.earningsest)"
+                  ng-repeat="earnings in yahooFinance.earningsest">
+                  <span ng-bind="earnings"></span>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+              </tr>
+              <tr>
+                <td>
+                  EPS Rev. - Up Last 7 Days
+                </td>
+                <!--
+                              <td ng-repeat="eup7 in yahooFinance.epsrevup7">
+                <span ng-bind="eup7"></span>
+                              </td> -->
+                <td ng-bind="yahooFinance.epsrevup7[0]"
+                  ng-class="mathSwitch.positiveNegative(yahooFinance.epsrevup7[0])"></td>
+                <td ng-bind="yahooFinance.epsrevup7[1]"
+                  ng-class="mathSwitch.positiveNegative(yahooFinance.epsrevup7[1])"></td>
+                <td ng-bind="yahooFinance.epsrevup7[2]"
+                  ng-class="mathSwitch.positiveNegative(yahooFinance.epsrevup7[2])"></td>
+                <td ng-bind="yahooFinance.epsrevup7[3]"
+                  ng-class="mathSwitch.positiveNegative(yahooFinance.epsrevup7[3])"></td>
+              </tr>
+              <tr>
+                <td>
+                  EPS Rev. - Up Last 30 Days
+                </td>
+                <td ng-bind="yahooFinance.epsrevup30[0]"
+                  ng-class="mathSwitch.positiveNegative(yahooFinance.epsrevup30[0])"></td>
+                <td ng-bind="yahooFinance.epsrevup30[1]"
+                  ng-class="mathSwitch.positiveNegative(yahooFinance.epsrevup30[1])"></td>
+                <td ng-bind="yahooFinance.epsrevup30[2]"
+                  ng-class="mathSwitch.positiveNegative(yahooFinance.epsrevup30[2])"></td>
+                <td ng-bind="yahooFinance.epsrevup30[3]"
+                  ng-class="mathSwitch.positiveNegative(yahooFinance.epsrevup30[3])"></td>
+              </tr>
+              <tr>
+                <td>
+                  EPS Rev. - Down Last 30 Days
+                </td>
+                <td ng-bind="yahooFinance.epsdownlast30[0]"
+                  ng-class="mathSwitch.positiveNegative(-yahooFinance.epsdownlast30[0])"></td>
+                <td ng-bind="yahooFinance.epsdownlast30[1]"
+                  ng-class="mathSwitch.positiveNegative(-yahooFinance.epsdownlast30[1])"></td>
+                <td ng-bind="yahooFinance.epsdownlast30[2]"
+                  ng-class="mathSwitch.positiveNegative(-yahooFinance.epsdownlast30[2])"></td>
+                <td ng-bind="yahooFinance.epsdownlast30[3]"
+                  ng-class="mathSwitch.positiveNegative(-yahooFinance.epsdownlast30[3])"></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div ng-if="wa6Steps">
+
+
+<div class="page-header">
+  <h1>Medium Term <small>Steps 4,5,6</small></h1>
+</div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">Sustainable Competitive Advantage</h3>
+          </div>
+          <div class="panel-body">
+            <h4>Gross Margins and Net Margins highest in Industry (Higher than industry and
+              sector)</h4>
+          </div>
+          <table class='table table-striped table-bordered table-hover table-condensed'>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>
+                  Company
+                </th>
+                <th>
+                  Industry
+                </th>
+                <th>
+                  Sector
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Gross Margins</td>
+                <td ng-class="mathSwitch.ascdesc(-reutersFinancial.grossmargin)"
+                  ng-repeat="gm in reutersFinancial.grossmargin">
+                  <span ng-bind="gm"></span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Net Margins
+                </td>
+                <td ng-class="mathSwitch.ascdesc(reutersFinancial.netmargin)"
+                  ng-repeat="nm in reutersFinancial.netmargin">
+                  <span ng-bind="nm"></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">Return on Equity</h3>
+          </div>
+          <div class="panel-body">
+            <h4>ROE> 12-15%</h4>
+          </div>
+          <table class='table table-striped table-bordered table-hover table-condensed'>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>
+                  Company
+                </th>
+                <th>
+                  Industry
+                </th>
+                <th>
+                  Sector
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ROE</td>
+                <td ng-class="mathSwitch.roe(roe)" ng-repeat="roe in reutersFinancial.roe">
+                  <span ng-bind="roe"></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">Undervalued Stock (Calculate IV)</h3>
+          </div>
+          <div class="panel-body">
+            <h4>Price of stock is lower than Intrinsic Value (IV).</h4>
+          </div>
+          <table class='table table-striped table-bordered table-hover table-condensed'>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>
+                  Results
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Price</td>
+                <td>
+                  <span ng-bind="reutersOverview.price"></span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  IV
+                </td>
+                <td>
+                  <span
+                    ng-bind="sum(discountValue(projectedCF(sum(cashflowQ.cf_o),reutersFinancial.ltgrowth[3],5),discountArrayFn(discountRate(reutersFinancial.beta))))/reutersOverview.shares_outstanding
+                    -
+                    sumDebt(balanceSheetQ.st_borrow,balanceSheetQ.lt_debt)/reutersOverview.shares_outstanding
+                    + lastNum(balanceSheetQ.cash_sti)/reutersOverview.shares_outstanding |number:
+                    2"></span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Delta (%)
+                </td>
+                <td>
+                  <span
+                    ng-bind="((sum(discountValue(projectedCF(sum(cashflowQ.cf_o),reutersFinancial.ltgrowth[3],5),discountArrayFn(discountRate(reutersFinancial.beta))))/reutersOverview.shares_outstanding
+                    -
+                    sumDebt(balanceSheetQ.st_borrow,balanceSheetQ.lt_debt)/reutersOverview.shares_outstanding
+                    + lastNum(balanceSheetQ.cash_sti)/reutersOverview.shares_outstanding) -
+                    reutersOverview.price)/(reutersOverview.price) | percentage: 2"></span>
+                    <h4 ng-if="sum(discountValue(projectedCF(sum(cashflowQ.cf_o),reutersFinancial.ltgrowth[3],5),discountArrayFn(discountRate(reutersFinancial.beta))))/reutersOverview.shares_outstanding
+                    -
+                    sumDebt(balanceSheetQ.st_borrow,balanceSheetQ.lt_debt)/reutersOverview.shares_outstanding
+                    + lastNum(balanceSheetQ.cash_sti)/reutersOverview.shares_outstanding">
+
+        <span class="label label-danger">PROCESS COMPLETE</span>
+                    </h4>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <h3>Intrinsic Value Calculator</h3>
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <h3 class="panel-title">Intrinsic Value</h3>
+      </div>
+      <div class="panel-body">
+        <strong>Operating Cash Flow:
+        </strong>
+        <span ng-bind="sum(cashflowQ.cf_o)"></span>
+        <br>
+          <strong>Total Debt:
+          </strong>
+          <span ng-bind="sumDebt(balanceSheetQ.st_borrow,balanceSheetQ.lt_debt)"></span>
+          <br>
+            <strong>Cash and Equivalents:
+            </strong>
+            <span ng-bind="lastNum(balanceSheetQ.cash_sti)"></span>
+            <br>
+            <strong>EPS Growth (Last 5 Years):</strong>
+            <span ng-bind="reutersFinancial.eps5year[0]"></span>
+            <br>
+              <strong>CF Growth Rate (Y1-3):</strong>
+              <span ng-bind="reutersFinancial.ltgrowth[3]"></span>
+              -
+              <span ng-bind="reutersFinancial.ltgrowth[1]"></span>
+              -
+              <span ng-bind="reutersFinancial.ltgrowth[2]"></span>
+              <br>
+                <strong>CF Growth Rate (Y4-10):</strong>
+                Set at 5%
+                <br>
+                  <strong>No. of Shares Outstanding:
+                  </strong>
+                  <span ng-bind="reutersOverview.shares_outstanding"></span>
+                  millions
+                  <br>
+                    <strong>Discount Rate:
+                    </strong>
+                    <span ng-bind="discountRate(reutersFinancial.beta)"></span>
+                    <hr>
+                      <strong>Present Value of 10 Yr Cashflow:
+                      </strong>
+                      <span
+                        ng-bind="sum(discountValue(projectedCF(sum(cashflowQ.cf_o),reutersFinancial.ltgrowth[3],5),discountArrayFn(discountRate(reutersFinancial.beta))))
+                        | number: 2"></span>
+                      <br>
+                        <strong>PV of OCF Per Share:
+                        </strong>
+                        <span
+                          ng-bind="sum(discountValue(projectedCF(sum(cashflowQ.cf_o),reutersFinancial.ltgrowth[3],5),discountArrayFn(discountRate(reutersFinancial.beta))))/reutersOverview.shares_outstanding
+                          | number: 2"></span>
+                        <br>
+                          <strong>Debt Per Share:</strong>
+                          <span
+                            ng-bind="sumDebt(balanceSheetQ.st_borrow,balanceSheetQ.lt_debt)/reutersOverview.shares_outstanding
+                            | number: 2"></span>
+                          <br>
+                            <strong>Cash and Equivalents Per Share:
+                            </strong>
+                            <span
+                              ng-bind="lastNum(balanceSheetQ.cash_sti)/reutersOverview.shares_outstanding |
+                              number: 2"></span>
+                            <br>
+                              <h4>
+                                <strong>Final Intrinsic Value:
+                                </strong>
+                                <span
+                                  ng-bind="sum(discountValue(projectedCF(sum(cashflowQ.cf_o),reutersFinancial.ltgrowth[3],5),discountArrayFn(discountRate(reutersFinancial.beta))))/reutersOverview.shares_outstanding
+                                  -
+                                  sumDebt(balanceSheetQ.st_borrow,balanceSheetQ.lt_debt)/reutersOverview.shares_outstanding
+                                  + lastNum(balanceSheetQ.cash_sti)/reutersOverview.shares_outstanding |number:
+                                  2"></span>
+
+                              </h4>
+
+
+                            </div>
+                            <table class='table table-striped table-bordered table-hover table-condensed'>
+                              <thead>
+                                <tr>
+                                  <th>Data</th>
+                                  <th ng-repeat="num in [1,2,3,4,5,6,7,8,9,10]">
+                                    Year
+                                    <span ng-bind="num"></span>
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>Proj. Cashflow</td>
+                                  <td
+                                    ng-repeat="num in
+                                    projectedCF(sum(cashflowQ.cf_o),reutersFinancial.ltgrowth[3],5)">
+                                    <span ng-bind="num | number:0"></span>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    Discount Factor
+                                  </td>
+                                  <td ng-repeat="num in discountArrayFn(discountRate(reutersFinancial.beta))">
+                                    <span ng-bind="num | number:2"></span>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    Discount Value
+                                  </td>
+                                  <td
+                                    ng-repeat="num in
+                                    discountValue(projectedCF(sum(cashflowQ.cf_o),reutersFinancial.ltgrowth[3],5),discountArrayFn(discountRate(reutersFinancial.beta)))">
+                                    <span ng-bind="num | number:2"></span>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+
+                          </div>
