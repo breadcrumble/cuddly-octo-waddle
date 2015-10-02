@@ -69,7 +69,7 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
     $scope.verTwoFn = {};
     $scope.verTwoResults = {};
 
-    $scope.testksjdfh = 1+4;
+    $scope.testksjdfh = 1+4+200;
     $scope.verTwoFn.getExchange = function(ticker) {
 
       $scope.reutersOverview = {};
