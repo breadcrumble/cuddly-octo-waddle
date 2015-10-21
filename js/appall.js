@@ -361,9 +361,18 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
             return ((parseFloat(capital) * parseFloat(riskTrade / 100)) / parseFloat(riskShare));
           }
         };
+
+        var calculateProfitTarget = function(currentPrice, stopLoss, rtrRatio) {
+          if (!(parseFloat(currentPrice) + parseFloat(stopLoss) + parseFloat(rtrRatio))) {
+            return ("Input numbers only.");
+          } else {
+            return ((parseFloat(currentPrice) - parseFloat(stopLoss))*parseFloat(rtrRatio) + parseFloat(currentPrice));
+          }
+        };
         //revealing module pattern
         $scope.rewardToRisk = rewardToRisk;
         $scope.positionSizing = positionSizing;
+        $scope.calculateProfitTarget = calculateProfitTarget;
 
       }]
     }

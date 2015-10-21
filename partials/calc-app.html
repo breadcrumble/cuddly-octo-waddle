@@ -74,6 +74,23 @@
                 </h4>
               </td>
             </tr>
+            <tr>
+              <td><h4>Insert Your Reward To Risk Ratio to Calculate Take Profit Point
+                  <br><small>Should be > 1</small></h4>
+                </td>
+                <td>
+                  <h4><input class="form-control" ng-model="r.rtrRatio" type="text">
+                  </h4>
+                </td>
+              </tr>
+              <tr>
+                <td><h4>Calculated Take Profit Point</h4>
+                  </td>
+                  <td>
+                    <h4>{{calculateProfitTarget(r.currentPrice,r.stopLoss,r.rtrRatio)}}
+                    </h4>
+                  </td>
+                </tr>
           </tbody>
         </table>
       </div>
