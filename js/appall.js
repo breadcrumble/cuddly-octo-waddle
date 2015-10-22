@@ -106,12 +106,11 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
     $scope.mathSwitch = mathSwitch;
 
     //NOTE end copy
-    $scope.dataOne =
-    [
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-      ];
+    $scope.dataOne = [
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0]
+    ];
     $scope.labels = ['Y1', 'Y2', 'Y3'];
     $scope.series = ['Sales', 'Net Income', 'Cashflow'];
 
@@ -130,30 +129,29 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
     $scope.verTwoFn.getExchange = function(ticker) {
 
       $scope.verTwoResults = {};
-      $scope.dataOne =
-        [
-          [0, 0, 0],
-          [0, 0, 0],
-          [0, 0, 0]
-        ];
+      $scope.dataOne = [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
+      ];
       $http.get("https://api.import.io/store/data/9a47319f-e2d2-46bb-8286-387fedefa516/_query?input/webpage/url=https%3A%2F%2Ffinance.yahoo.com%2Fq%2Fis%3Fs%3D" + ticker + "%2BIncome%2BStatement%26annual&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a")
-    .success(function(data) {
-        $scope.verTwoResults.incomeStatement = data.results[0];
+        .success(function(data) {
+          $scope.verTwoResults.incomeStatement = data.results[0];
 
-        $scope.verTwoFn.getData(ticker, exchangeSwitchTwo($scope.verTwoResults.incomeStatement.exchange));
-        //$scope.getData(ticker, exchangeSwitch($scope.exchangeSymbol.exchange));
-        $scope.dataOne.splice(0, 1, invertArray($scope.verTwoResults.incomeStatement.revenue));
-        $scope.dataOne.splice(1, 1, invertArray($scope.verTwoResults.incomeStatement.net_income));
-      });
+          $scope.verTwoFn.getData(ticker, exchangeSwitchTwo($scope.verTwoResults.incomeStatement.exchange));
+          //$scope.getData(ticker, exchangeSwitch($scope.exchangeSymbol.exchange));
+          $scope.dataOne.splice(0, 1, invertArray($scope.verTwoResults.incomeStatement.revenue));
+          $scope.dataOne.splice(1, 1, invertArray($scope.verTwoResults.incomeStatement.net_income));
+        });
       $http.get("https://api.import.io/store/data/c9d468c4-33b4-430c-a7cb-4665a7ebbd44/_query?input/webpage/url=https%3A%2F%2Ffinance.yahoo.com%2Fq%2Fbs%3Fs%3D" + ticker + "&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a")
-    .success(function(data) {
-        $scope.verTwoResults.balanceSheet = data.results[0];
-      });
-      $http.get("https://api.import.io/store/data/516dd766-cf25-4fcf-a517-a5c4e464f774/_query?input/webpage/url=https%3A%2F%2Ffinance.yahoo.com%2Fq%2Fcf%3Fs%3D"+ ticker + "%2BCash%2BFlow%26annual&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a")
-    .success(function(data) {
-        $scope.verTwoResults.cashflow = data.results[0];
-        $scope.dataOne.splice(2, 1, invertArray($scope.verTwoResults.cashflow.ocf));
-      });
+        .success(function(data) {
+          $scope.verTwoResults.balanceSheet = data.results[0];
+        });
+      $http.get("https://api.import.io/store/data/516dd766-cf25-4fcf-a517-a5c4e464f774/_query?input/webpage/url=https%3A%2F%2Ffinance.yahoo.com%2Fq%2Fcf%3Fs%3D" + ticker + "%2BCash%2BFlow%26annual&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a")
+        .success(function(data) {
+          $scope.verTwoResults.cashflow = data.results[0];
+          $scope.dataOne.splice(2, 1, invertArray($scope.verTwoResults.cashflow.ocf));
+        });
 
 
 
@@ -180,16 +178,17 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
       return array.reverse();
     };
     var exchangeSwitchTwo = function(exchange) {
-      var xSymbol = exchange.substr(1), tickerSymbol;
+      var xSymbol = exchange.substr(1),
+        tickerSymbol;
       switch (xSymbol) {
         case "NasdaqGS":
-        tickerSymbol = "O";
+          tickerSymbol = "O";
           break;
-          case "NYSE":
+        case "NYSE":
           tickerSymbol = "N";
-            break;
+          break;
         default:
-        tickerSymbol = "";
+          tickerSymbol = "";
       }
       return tickerSymbol;
     };
@@ -283,7 +282,7 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
           $scope.calendarData = [];
           $http.get("https://api.import.io/store/data/21c5ef17-bb28-475a-9707-ba03fdd5fc2c/_query?input/webpage/url=http%3A%2F%2Fbiz.yahoo.com%2Fresearch%2Fearncal%2F" + i + ".html&_user=685ff313-5202-4859-9151-5f05b6d38fa6&_apikey=685ff3135202485991515f05b6d38fa6d63e0a91e0726cd9a83c014363765dec4f93106128f4aee1f59af997f215355c549765b0e6611f4797dd2b03ef9ccc663fd9071946ee68480bdb6ba084190b2a").success(function(data) {
             var temp = data.results;
-            temp.splice(0,2);
+            temp.splice(0, 2);
             calendar.push(temp);
             // $scope.calendarData = calendar[0];
             $scope.calendarData = _.flatten(calendar);
@@ -323,9 +322,9 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
     var convertStringToDate = function(string) {
       // var string = str.toString();
       // if (string.length == 6) {
-        var pattern = /(\d{4})(\d{2})(\d{2})/;
-        var date = new Date(string.replace(pattern, '$1-$2-$3'));
-        return weekday[date.getDay()];
+      var pattern = /(\d{4})(\d{2})(\d{2})/;
+      var date = new Date(string.replace(pattern, '$1-$2-$3'));
+      return weekday[date.getDay()];
       // }
 
     };
@@ -366,9 +365,46 @@ angular.module('app', ['ui.bootstrap', 'chart.js', 'ui.router'])
           if (!(parseFloat(currentPrice) + parseFloat(stopLoss) + parseFloat(rtrRatio))) {
             return ("Input numbers only.");
           } else {
-            return ((parseFloat(currentPrice) - parseFloat(stopLoss))*parseFloat(rtrRatio) + parseFloat(currentPrice));
+            return ((parseFloat(currentPrice) - parseFloat(stopLoss)) * parseFloat(rtrRatio) + parseFloat(currentPrice));
           }
         };
+
+        $scope.longOrShort = function(currentPrice, movingAverage) {
+          if (!(parseFloat(currentPrice) + parseFloat(movingAverage))) {
+            return ("Input numbers only.");
+          } else if (parseFloat(currentPrice) > parseFloat(movingAverage)) {
+            return "bull";
+          } else if (parseFloat(currentPrice) < parseFloat(movingAverage)) {
+            return "bear";
+          } else {
+            return "error";
+          }
+        };
+
+
+$scope.calculateStopLoss = function(currentPrice, movingAverage, atr) {
+  var stopLossPoint, riskPerShare;
+  if (!(parseFloat(currentPrice) + parseFloat(movingAverage) + parseFloat(atr))) {
+    return ("Input numbers only.");
+  }
+//BULL condition
+  else if (parseFloat(currentPrice) > parseFloat(movingAverage)) {
+stopLossPoint = parseFloat(movingAverage) - parseFloat(atr);
+riskPerShare = parseFloat(currentPrice) - stopLossPoint;
+var array = [stopLossPoint, riskPerShare];
+    return array;
+  } else if (parseFloat(currentPrice) < parseFloat(movingAverage)) {
+    stopLossPoint = parseFloat(movingAverage) + parseFloat(atr);
+    riskPerShare = stopLossPoint - parseFloat(currentPrice);
+    var array = [stopLossPoint, riskPerShare];
+        return array;
+    
+  } else {
+    return "error";
+  }
+};
+
+
         // var calculateRiskPerTrade = function(currentPrice, stopLoss) {
         //   if (!(parseFloat(currentPrice) + parseFloat(stopLoss))) {
         //     return ("Input numbers only.");
