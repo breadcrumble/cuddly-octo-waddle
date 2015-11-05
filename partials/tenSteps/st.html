@@ -1,0 +1,112 @@
+<div class="well well-md" id="st">
+<h2 class="center-text highlight">{{"Short" + " Term"}} Momentum</h2>
+<hr></hr>
+<h3 id="sno">Sales, Net Income, Operating Cashflow</h3>
+<strong>
+{{stockObject | json}}
+<hr></hr>
+{{aaplData | json}}</strong>
+
+<div class="row">
+
+  <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 col-xl-10 col-xl-offset-1">
+
+  <div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Profits: Sales, Net Income and Operating Cashflow</h3>
+  </div>
+  <div class="panel-body">
+Figures in terms of (thousands? Millions?)
+
+{{newArray | json}}
+
+  </div>
+  <table class='table table-striped table-bordered table-hover table-condensed'>
+    <thead>
+      <tr>
+        <th>Data</th>
+            <th ng-bind="aaplData.incomeStatement.years[0]">
+            </th>
+            <th ng-bind="aaplData.incomeStatement.years[2]">
+            </th>
+            <th ng-bind="aaplData.incomeStatement.years[4]">
+            </th>
+            <th ng-bind="aaplData.incomeStatement.years[6]">
+            </th>
+            <th ng-bind="aaplData.incomeStatement.years[8]">
+            </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Sales</td>
+        <td ng-bind="aaplData.incomeStatement.revenue[0]"></td>
+        <td ng-bind="aaplData.incomeStatement.revenue[1]"></td>
+        <td ng-bind="aaplData.incomeStatement.revenue[2]"></td>
+        <td ng-bind="aaplData.incomeStatement.revenue[3]"></td>
+        <td ng-bind="aaplData.incomeStatement.revenue[4]"></td>
+
+      </tr>
+      <tr>
+            <td>Net Income</td>
+            <td ng-bind="aaplData.incomeStatement.netincome[0]"></td>
+            <td ng-bind="aaplData.incomeStatement.netincome[1]"></td>
+            <td ng-bind="aaplData.incomeStatement.netincome[2]"></td>
+            <td ng-bind="aaplData.incomeStatement.netincome[3]"></td>
+            <td ng-bind="aaplData.incomeStatement.netincome[4]"></td>
+          </tr>
+          <tr>
+            <td>
+              Operating Cashflow - Annual
+            </td>
+            <td ng-bind="aaplData.cashflow.ocf[0]"></td>
+            <td ng-bind="aaplData.cashflow.ocf[1]"></td>
+            <td ng-bind="aaplData.cashflow.ocf[2]"></td>
+            <td ng-bind="aaplData.cashflow.ocf[3]"></td>
+            <td ng-bind="aaplData.cashflow.ocf[4]"></td>
+          </tr>
+    </tbody>
+  </table>
+  <div class="panel-footer">
+    <canvas id="line" class="chart chart-line" data="newArray" series="series"
+    labels="labels"></canvas>
+  </div>
+  </div>
+  </div>
+</div>
+<hr></hr>
+<h3 id="fgd">Future Growth Drivers: EPS</h3>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 col-xl-10 col-xl-offset-1">
+
+  <div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">adfgdafgdfg</h3>
+  </div>
+  <div class="panel-body">
+  dsfasdfsdfdsf
+  </div>
+  <table class='table table-striped table-bordered table-hover table-condensed'>
+    <thead>
+      <tr>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="panel-footer">
+
+  </div>
+  </div>
+  <hr></hr>
+  </div>
+</div>
+
+
+
+</div>

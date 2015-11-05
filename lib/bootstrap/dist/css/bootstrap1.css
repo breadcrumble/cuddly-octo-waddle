@@ -4217,7 +4217,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar {
   position: relative;
   min-height: 60px;
-  /*margin-bottom: 20px;*/
+  margin-bottom: 20px;
   border: 1px solid transparent;
 }
 @media (min-width: 768px) {
@@ -4325,9 +4325,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-brand {
   float: left;
   padding: 20px 15px;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 20px;
   height: 60px;
+  
 }
 .navbar-brand:hover,
 .navbar-brand:focus {
@@ -4544,7 +4545,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-default {
-  background-color: #003049;
+  background-color: #3e3f3a;
   border-color: #3e3f3a;
 }
 .navbar-default .navbar-brand {
@@ -4563,14 +4564,14 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: #F18F01;
+  color: #ffffff;
   background-color: transparent;
 }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-  color: #F18F01;
-  background-color: #003049;
+  color: #ffffff;
+  background-color: #393a35;
 }
 .navbar-default .navbar-nav > .disabled > a,
 .navbar-default .navbar-nav > .disabled > a:hover,
@@ -4655,7 +4656,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #dfd7ca;
 }
 .navbar-inverse .navbar-nav > li > a {
-  color: #6b9430;
+  color: #254117;
 }
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
@@ -5009,7 +5010,7 @@ a.badge:focus {
 .jumbotron {
   padding-top: 30px;
   padding-bottom: 30px;
-  /*margin-bottom: 30px;*/
+  margin-bottom: 30px;
   color: inherit;
   background-color: #f8f5f0;
 }
@@ -6934,9 +6935,9 @@ input:focus,
 }
 .panel .panel-heading,
 .panel .panel-title {
-  font-size: 11px;
+  font-size: 16px;
   line-height: 22px;
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
   color: #fff;
 }
